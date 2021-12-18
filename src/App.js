@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Web3 from "web3";
 import { SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS } from './config'
+
 class App extends Component {
   constructor() {
     super()
@@ -12,7 +13,7 @@ class App extends Component {
   }
 
   async loadBlockChainData() {
-    const web3 = new Web3(Web3.givenProvider || "http://localhost:7545")
+    const web3 = new Web3("http://localhost:7545")
     const accounts = await web3.eth.getAccounts()
     this.setState({ account: accounts[0] })
     const simpstorage = new web3.eth.Contract(SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS);
@@ -22,7 +23,25 @@ class App extends Component {
     this.setState({ value: value })
   }
 
+  
   render() {
+    const getTotalAccount=async ()=>{
+      const web3 = new Web3("http://localhost:7545")
+      const accounts = await web3.eth.getAccounts()
+      console.log("Length:",accounts.length)
+      console.log(accounts)
+    }
+    const createAccount=()=>{
+      //this will create account from scratch
+      
+      // let accounts = new Accounts('http://localhost:7545');
+      // var Accounts = require('web3-eth-accounts');
+      const web3 = new Web3("http://localhost:7545")
+      let temp=web3.eth.accounts.create();
+      console.log(temp)
+
+
+    }
     // return (
     //   // <h1>{this.state.account}</h1>
 
@@ -46,6 +65,9 @@ class App extends Component {
           <br/>
           < input type="submit" hidden="" />
         </ form>
+
+        <button onClick={createAccount}>create Account</button>
+        <button onClick={getTotalAccount}>getTotalAccount</button>
       </ div>
     );
   }
