@@ -1,193 +1,9 @@
-export const SIMP_STORAGE_ADDRESS = ''
+export const SIMP_STORAGE_ADDRESS = '0xBDb397194ADa8D2d5c4D6a5f1592B2cb69f9551a'
 export const SIMP_STORAGE_ABI = [
   {
     "inputs": [],
     "stateMutability": "nonpayable",
     "type": "constructor"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      }
-    ],
-    "name": "ActiveChallan",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "LicenseID",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "CitizenName",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "CitizenCNIC",
-        "type": "string"
-      },
-      {
-        "internalType": "enum ChallanSystem.VehicleType",
-        "name": "CarType",
-        "type": "uint8"
-      },
-      {
-        "internalType": "string",
-        "name": "CarNumberPlate",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "timeStamp",
-        "type": "string"
-      },
-      {
-        "internalType": "uint256",
-        "name": "Fine",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "status",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "string",
-        "name": "",
-        "type": "string"
-      },
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "ChallanHistory",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "LicenseID",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "CitizenName",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "CitizenCNIC",
-        "type": "string"
-      },
-      {
-        "internalType": "enum ChallanSystem.VehicleType",
-        "name": "CarType",
-        "type": "uint8"
-      },
-      {
-        "internalType": "string",
-        "name": "CarNumberPlate",
-        "type": "string"
-      },
-      {
-        "internalType": "string",
-        "name": "timeStamp",
-        "type": "string"
-      },
-      {
-        "internalType": "uint256",
-        "name": "Fine",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "status",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "Owner",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "name": "RuleList",
-    "outputs": [
-      {
-        "internalType": "string",
-        "name": "Description",
-        "type": "string"
-      },
-      {
-        "internalType": "uint256",
-        "name": "ACategoryVehicle_Fine",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "BCategoryVehicle_Fine",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "CCategoryVehicle_Fine",
-        "type": "uint256"
-      },
-      {
-        "internalType": "bool",
-        "name": "status",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "TP",
-    "outputs": [
-      {
-        "internalType": "bool",
-        "name": "",
-        "type": "bool"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
   },
   {
     "inputs": [],
@@ -200,7 +16,8 @@ export const SIMP_STORAGE_ABI = [
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [],
@@ -213,7 +30,35 @@ export const SIMP_STORAGE_ABI = [
       }
     ],
     "stateMutability": "view",
+    "type": "function",
+    "constant": true
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_temp",
+        "type": "address"
+      }
+    ],
+    "name": "transferAdmin",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getOwner",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -328,7 +173,7 @@ export const SIMP_STORAGE_ABI = [
         "type": "string"
       },
       {
-        "internalType": "enum ChallanSystem.VehicleType",
+        "internalType": "enum Final20.VehicleType",
         "name": "_CarType",
         "type": "uint8"
       },
@@ -381,7 +226,7 @@ export const SIMP_STORAGE_ABI = [
             "type": "string"
           },
           {
-            "internalType": "enum ChallanSystem.VehicleType",
+            "internalType": "enum Final20.VehicleType",
             "name": "CarType",
             "type": "uint8"
           },
@@ -411,13 +256,14 @@ export const SIMP_STORAGE_ABI = [
             "type": "bool"
           }
         ],
-        "internalType": "struct ChallanSystem.Challan",
+        "internalType": "struct Final20.Challan",
         "name": "",
         "type": "tuple"
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [
@@ -447,7 +293,7 @@ export const SIMP_STORAGE_ABI = [
             "type": "string"
           },
           {
-            "internalType": "enum ChallanSystem.VehicleType",
+            "internalType": "enum Final20.VehicleType",
             "name": "CarType",
             "type": "uint8"
           },
@@ -477,13 +323,14 @@ export const SIMP_STORAGE_ABI = [
             "type": "bool"
           }
         ],
-        "internalType": "struct ChallanSystem.Challan[]",
+        "internalType": "struct Final20.Challan[]",
         "name": "",
         "type": "tuple[]"
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [],
@@ -517,13 +364,14 @@ export const SIMP_STORAGE_ABI = [
             "type": "bool"
           }
         ],
-        "internalType": "struct ChallanSystem.VoilationRule[]",
+        "internalType": "struct Final20.VoilationRule[]",
         "name": "",
         "type": "tuple[]"
       }
     ],
     "stateMutability": "view",
-    "type": "function"
+    "type": "function",
+    "constant": true
   },
   {
     "inputs": [],
@@ -536,7 +384,8 @@ export const SIMP_STORAGE_ABI = [
       }
     ],
     "stateMutability": "payable",
-    "type": "function"
+    "type": "function",
+    "payable": true
   },
   {
     "inputs": [
@@ -549,6 +398,7 @@ export const SIMP_STORAGE_ABI = [
     "name": "payChallan",
     "outputs": [],
     "stateMutability": "payable",
-    "type": "function"
+    "type": "function",
+    "payable": true
   }
 ]

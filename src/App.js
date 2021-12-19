@@ -99,6 +99,27 @@ class App extends Component {
       web3.eth.getBalance('0x64647B792c7B31904E7a12c3857A54893a8c9ADb').then(value => console.log(value.toString()))
     }
 
+    const transferAdmin =async ()=>{
+      const web3 = new Web3("http://localhost:7545")
+      const accounts = await web3.eth.getAccounts()
+      let Contract = require('web3-eth-contract');
+      Contract.setProvider("http://localhost:7545");
+      let contract = new Contract(SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS);  //get the instance of contract
+      
+      contract.methods.transferAdmin("0x64647B792c7B31904E7a12c3857A54893a8c9ADb")
+        .send({ from: accounts[0]},
+          function (error, result) {
+            console.log("result:",result)
+          });
+
+      //display admin
+      contract.methods.getOwner()
+        .call({ from: '0x64647B792c7B31904E7a12c3857A54893a8c9ADb' },
+          function (error, result) {
+            console.log("\nCurrent Admin",result)
+          });
+    }
+
     return (
       < div>
         {/* <h1>Your account: {this.state.account}</h1>
@@ -122,6 +143,7 @@ class App extends Component {
         <button onClick={doTransaction}>doTransaction</button>
         <button onClick={callContract}>callContract</button>
         <button onClick={getAccountBalance}>getBalance</button>
+        <button onClick={transferAdmin}>changeAdmin</button>
       </ div>
     );
   }
