@@ -25,12 +25,14 @@ class App extends Component {
 
 
   render() {
+    
     const getTotalAccount = async () => {
       const web3 = new Web3("http://localhost:7545")
       const accounts = await web3.eth.getAccounts()
       console.log("Length:", accounts.length)
       console.log(accounts)
     }
+
     const createAccount = () => {
       //this will create account from scratch
       const web3 = new Web3("http://localhost:7545")
@@ -92,17 +94,19 @@ class App extends Component {
     }
 
     const deployContract = () => {
-      // var Contract = require('web3-eth-contract');
+      const web3 = new Web3("http://localhost:7545")
+      //perfectly working with the blockChain to call contract
+      let Contract = require('web3-eth-contract');
+      Contract.setProvider("http://localhost:7545");
+      let contract = new Contract(SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS);  //get the instance of contract
+      console.log(contract.options.jsonInterface)
+      // let Contract = require('web3-eth-contract');
       // Contract.setProvider("http://localhost:7545");
-      // var contract = new Contract(jsonInterface, address);
+
+      
 
     }
-    // return (
-    //   // <h1>{this.state.account}</h1>
-
-    //   <h1>Current Value of Stored Data:{this.state.value}</h1>
-    // );
-
+    
     return (
       < div>
         <h1>Your account: {this.state.account}</h1>
@@ -125,6 +129,7 @@ class App extends Component {
         <button onClick={getTotalAccount}>getTotalAccount</button>
         <button onClick={doTransaction}>doTransaction</button>
         <button onClick={callContract}>callContract</button>
+        <button onClick={deployContract}>deployContract</button>
       </ div>
     );
   }
