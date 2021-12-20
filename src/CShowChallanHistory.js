@@ -10,8 +10,29 @@ import { auto } from 'async';
 
 function CShowChallanHistory() {
   const [ListRule, setListRule] = useState([]);
+  const [ListChallan, setListChallan] = useState([]);
   const [Msg, setMsg] = useState(""); //the account has been created and added to blockchain (store that password and address to login as officer)
 
+
+  const getChallanHistory=async ()=>{
+    let id = localStorage.getItem('id');
+    const web3 = new Web3("http://localhost:7545")
+    //perfectly working with the blockChain to call contract
+    let Contract = require('web3-eth-contract');
+    Contract.setProvider("http://localhost:7545");
+    let contract = new Contract(SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS);  //get the instance of contract
+    try {
+      contract.methods.getAllChallan(id)
+        .call({ from: id },
+          function (error, result) {
+            console.log(result)
+            setListChallan(result)
+          });
+
+    } catch (e) {
+      setMsg("Something went wrong")
+    }
+  }
 
   const getVoilationRule = async () => {
     let id = localStorage.getItem('id');
@@ -35,8 +56,14 @@ function CShowChallanHistory() {
     }
   }
 
+  const getVehicleName =async (value) =>{
+    let Vehicle=["Motorcycle","Motorcar","Jeep","PublicServiceVehicle","PrivateCarrier","PublicCarrier"]
+    return Vehicle[value];
+  }
+
   useEffect(() => {
-    getVoilationRule()
+    getVoilationRule();
+    getChallanHistory();
   }, [])
 
 
