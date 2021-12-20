@@ -13,7 +13,7 @@ import Sidenav from './sidenav';
 function Citizen() {
   return (
     <div>
-      <Sidenav name0="Citizen Panel" name1="Show Traffic Rules" name2="Pay Challan History" name3="Show Current Challan" name4="" link0="/citizen" link1="/citizen/CShowTR" link2="/citizen/CChallanHistory" link3="/citizen/CPayChallan" link4="/citizen"/>
+      <Sidenav name0="Citizen Panel" name1="Show Traffic Rules" name2="Show Challan History" name3="Pay Current Challan" name4="" link0="/citizen" link1="/citizen/CShowTR" link2="/citizen/CChallanHistory" link3="/citizen/CPayChallan" link4="/citizen"/>
       
       <BackgroundSlider
         images={[background1, background2]}
