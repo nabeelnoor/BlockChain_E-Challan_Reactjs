@@ -11,6 +11,9 @@ import Citizen from './Citizen';
 import AddTP from './AddTP';
 import AddTR from './AddTR';
 import GetTR from './GetTR';
+import Police from './Police';
+import PShowTR from './PShowTR';
+import AddChallan from './AddChallan';
 
 
 
@@ -30,14 +33,15 @@ class App extends React.Component {
         <Route path="/" caseSensitive={false} element={<Main />} />
         <Route path="/block" caseSensitive={false} element={<Block />} />
         <Route path="admin" caseSensitive={false} element={<Admin />} />
-        <Route path="citizen" caseSensitive={false} element={<Citizen />} />
-        <Route path="police" caseSensitive={false} element={<Admin />} />
         <Route path="admin/addTP" caseSensitive={false} element={<AddTP />} />
         <Route path="admin/addTR" caseSensitive={false} element={<AddTR />} />
         <Route path="/admin/showTR" caseSensitive={false} element={<GetTR />} />
+        <Route path="citizen" caseSensitive={false} element={<Citizen />} />
+        <Route path="police" caseSensitive={false} element={<Police />} />
+        <Route path="police/showTR" caseSensitive={false} element={<PShowTR />} />
+        <Route path="police/addChallan" caseSensitive={false} element={<AddChallan />} /> 
         
-        {/* <Route path="citizen" caseSensitive={false} element={<Chat />} />
-        <Route path="police" caseSensitive={false} element={<Test />} /> */}
+        
       </Routes>
     </Router>
       )  

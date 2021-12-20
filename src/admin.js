@@ -13,13 +13,6 @@ import Sidenav from './sidenav';
 
 function Admin() {
 
-  const [visibility, setVisibility] = useState(false);
-  const [Decider,setDecider]=useState(0);
-
-  const popupCloseHandler = (e) => {
-    setVisibility(e);
-  };
-
   return (
     <div>
       <Sidenav name0="Admin Panel" name1="Add Traffic Rule" name2="Show Traffic Rule" name3="Add Traffic Officer" name4="Show Traffic Officer" link0="/admin" link1="/admin/addTR" link2="/admin/showTR" link3="/admin/addTP" link4="/admin/showTP" />
