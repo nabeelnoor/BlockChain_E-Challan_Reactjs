@@ -27,7 +27,7 @@ function AddTP() {
     //this will create account from scratch
 
     const web3 = new Web3("http://localhost:7545")
-    
+
     let finalResult = web3.eth.personal.newAccount(Password)
       .then((result) => {
         console.log(result)
@@ -47,18 +47,26 @@ function AddTP() {
 
       <div>
         <h1 style={{ color: 'white', paddingLeft: '550px', paddingTop: '60px' }}>Create and Add Traffic Officer</h1>
-      
+
 
         <Card sx={{ maxWidth: 845, marginLeft: '390px' }}>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div" style={{paddingTop:"20px",paddingLeft:"250px"}}>
-              Create Traffic Officer
+            <Typography gutterBottom variant="h7" component="div" style={{ paddingTop: "20px", paddingLeft: "250px" }}>
+              Kept Password secret
             </Typography>
-            <TextField id="outlined-basic" label="Enter Password to generate ID" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px',width:"520px" }}
+            <TextField id="outlined-basic" label="Enter Password to generate ID" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px', width: "520px" }}
               onChange={(e) => { setPassword(e.target.value) }}
             />
-            
-            <Button variant="contained" style={{ marginTop:'6px',marginLeft: '50px', paddingBottom: '15px' }} onClick={createAccount}>create and add Account</Button>
+            <Button variant="contained" style={{ marginTop: '6px', marginLeft: '50px', paddingBottom: '15px' }} onClick={createAccount}>create and add Account</Button>
+            <br></br>
+            {Msg != "" ? <div style={{ display: "None" }}></div> :
+              <div>
+                <Typography gutterBottom variant="h7" component="div" style={{ paddingTop: "20px", paddingLeft: "20px" }}>
+                Newly Generated Address has been stored as police officer identity in blockchain
+              </Typography>
+                <TextField value={Address} id="outlined-basic" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px', width: "520px" }}
+                />
+              </div>}
           </CardContent>
 
 
