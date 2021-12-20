@@ -1,85 +1,125 @@
-import logo from './logo.svg';
 import './App.css';
 import BackgroundSlider from 'react-background-slider'
-import background1 from "./images/c3.jpg"
-import background2 from "./images/c5.jpg"
-// import Register from './register';
 import Button from '@mui/material/Button';
-import { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
-import CustomPopup from "./CustomPopup"
-import Sidenav from './sidenav';
+import { TextField, Input, TextareaAutosize } from '@mui/material';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { TextField, Input, TextareaAutosize } from '@mui/material';
-import Web3 from "web3";
-import { SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS } from './config'
-import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBView, MDBContainer, MDBInput, MDBBtn, MDBRow, MDBCol, MDBCard, MDBCardBody } from "mdbreact";
+// import { CardActionArea } from '@mui/material';
+import {  BrowserRouter as Router,
+    Link, } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+// import Cookies from 'universal-cookie';
+// import { useSelector,useDispatch } from 'react-redux'; //redux
+// import {StorePrivate,ClearPrivateData} from './actions/index' //redux
 
-// import { TextField } from '@mui/material';
+const style1 = { fill: 'grey',marginLeft:'10px' }
 
+//
 function AddChallan() {
-  // contract.methods.addChallan("license/address","Name","123-CNIC",1-(vehicel),"123-CarPlate",[0,1],"timestamp")
-  const [License, setLicense] = useState("");
-  const [Name, setName] = useState("");
-  const [CNIC, setCNIC] = useState("");
-  const [Plate, setPlate] = useState("");    //the account has been created and added to blockchain (store that password and address to login as officer)
-  const [CarType, setCarType] = useState(0); //{Motorcycle,Motorcar,Jeep,PublicServiceVehicle,PrivateCarrier,PublicCarrier}
-  const [ListRule, setListRule] = useState([]);
-  const [Msg, setMsg] = useState("");
-  const [VCode, setVCode] = useState([])
-
-
-  const getVoilationRule = async () => {
-    let id = localStorage.getItem('id');
-
-    const web3 = new Web3("http://localhost:7545")
-    //perfectly working with the blockChain to call contract
-    let Contract = require('web3-eth-contract');
-    Contract.setProvider("http://localhost:7545");
-    let contract = new Contract(SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS);  //get the instance of contract
-    //call to not payable function
-    try {
-      contract.methods.getTrafficRules()
-        .call({ from: id },
-          function (error, result) {
-            console.log(result)
-            setListRule(result)
-          });
-
-    } catch (e) {
-      setMsg("Something went wrong")
-    }
-  }
-
-
-  useEffect(() => {
-    getVoilationRule()
-  }, [])
 
 
 
-
-  const addChallan = async () => {
-
-  }
-
-
+    const [privateKey, setPrivateKey] = useState("");
+    const [publicKey, setPublicKey] = useState("");
+    const [loginPass, setloginPass] = useState('');
+    // console.log(str)
 
 
+      const [License, setLicense] = useState('');
+      const [Name, setName] = useState('');
+      const [CNIC, setCNIC] = useState('');
+      const [Plate, setPlate] = useState('');
+      const [CarType, setCarType] = useState('');
+      const [ListRule, setListRule] = useState([]);
+      const [Msg, setMsg] = useState('');
+      const [VCode, setVCode] = useState([]);
 
 
-  return (
-    <div>
-      <Sidenav name0="Officer Panel" name1="Show Traffic Rules" name2="Add Challan" name3="" name4="" link0="/police" link1="/police/showTR" link2="/police/addChallan" link3="/police" link4="/police" />
+      const options = [
+        'Motorcycle', 'Motorcar', 'Jeep','PublicServiceVehicle','PrivateCarrier','PublicCarrier'
+      ];
 
-      
+      const options1 = [
+        { value: 0, label: 'Motorcycle' },
+        { value: 1, label: 'Motorcar' },
+        { value: 2, label: 'Jeep' },
+        { value: 3, label: 'PublicServiceVehicle'},
+        { value: 4, label: 'PrivateCarrier'},
+        { value: 5, label: 'PublicCarrier'}
+      ];
+
+      const defaultOption = options[0];
+
+     // console.log(VCode)
+
+     const array = []
 
 
-    </div>
-  );
+
+      function VcodeF(code){
+        //console.log(code.value)
+        //// setVCode.push(code)
+        // console.log(VCode[0])
+        array.push(code.value)
+        //console.log(array)
+      }
+
+      function add(){
+          setVCode(array)
+      }
+
+      console.log(VCode);
+
+    return (
+        <div style={{backgroundColor:'khaki',height:"1000px"}}>
+            <Link to="/"><Button variant="contained">Back</Button></Link>
+            <div>
+                <Card sx={{ maxWidth: 700, marginLeft: '500px' }}>
+                    <CardContent style={{marginLeft:70}}>
+                        <Typography gutterBottom variant="h5" component="div" style={{marginLeft:170}}>
+                            Add Challan
+                        </Typography>
+                        <br />
+                        <TextField id="outlined-basic" label="Enter Name" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px' }} 
+                        onChange={(e) => {setName(e.target.value)}}
+                        />
+                        <TextField id="outlined-basic" label="Enter License ID" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px' }} 
+                        onChange={(e) => {setLicense(e.target.value)}}
+                        />
+                         <TextField id="outlined-basic" label="Enter CNIC" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px' }} 
+                        onChange={(e) => {setCNIC(e.target.value)}}
+                        />
+                         <TextField id="outlined-basic" label="Enter Plate No" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px' }} 
+                        onChange={(e) => {setPlate(e.target.value)}}
+                        />
+                        
+                         <TextField id="outlined-basic" label="Enter Car Type" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px' }} 
+                        onChange={(e) => {setCarType(e.target.value)}}
+                        />
+                        <TextField id="outlined-basic" label="Enter Message" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px' }} 
+                        onChange={(e) => {setMsg(e.target.value)}}
+                        />
+                        <Dropdown options={options1} placeholder="Select Rule" />
+                        <br />
+                        <Dropdown options={options1} placeholder="Select a Vehicle" onChange={(value)=>VcodeF(value)} />
+                        < br />
+                        < br />
+                        < br />
+                        < br />
+                        < br />
+                        < br />
+                        < br />
+                        <Button variant="contained" style={{ marginLeft: '195px', paddingBottom: '10px' }} onClick={add}>Add Challan</Button>
+                        <br />
+                    </CardContent>
+                </Card>
+            </div>
+        </div>
+    );
 }
 
 export default AddChallan;
