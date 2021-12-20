@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Web3 from "web3";
 import { SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS } from './config'
 
-class App extends Component {
+class Block extends Component {
   constructor() {
     super()
     this.state = { account: '', simpcontract: '', value: '' }
@@ -269,4 +269,4 @@ class App extends Component {
   }
 };
 
-export default App;
+export default Block;
