@@ -6,6 +6,8 @@ import {createBrowserHistory} from 'history';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
 import Block from './Block';
+import Admin from './admin';
+import Citizen from './Citizen';
 
 
 
@@ -24,8 +26,10 @@ class App extends React.Component {
       <Routes>
         <Route path="/" caseSensitive={false} element={<Main />} />
         <Route path="/block" caseSensitive={false} element={<Block />} />
-        {/* <Route path="admin" caseSensitive={false} element={<Register />} />
-        <Route path="citizen" caseSensitive={false} element={<Chat />} />
+        <Route path="admin" caseSensitive={false} element={<Admin />} />
+        <Route path="citizen" caseSensitive={false} element={<Citizen />} />
+        <Route path="police" caseSensitive={false} element={<Admin />} />
+        {/* <Route path="citizen" caseSensitive={false} element={<Chat />} />
         <Route path="police" caseSensitive={false} element={<Test />} /> */}
       </Routes>
     </Router>
