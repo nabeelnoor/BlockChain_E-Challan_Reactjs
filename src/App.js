@@ -162,7 +162,7 @@ class App extends Component {
     }
 
     const addTrafficRule=async ()=>{
-      let temp='0x2004Cf479F2361cf71e432f9c949d28bb6d05B28'
+      let temp='0xF4785b31f0758EDF2704e9518084e2b0C5cA5F7e'
       const web3 = new Web3("http://localhost:7545")
       //perfectly working with the blockChain to call contract
       let Contract = require('web3-eth-contract');
@@ -171,8 +171,8 @@ class App extends Component {
       
       web3.eth.personal.unlockAccount(temp, 'password', 50000).then(
         () => {
-          contract.methods.payChallan("l8")
-            .send({ from: temp ,value:web3.utils.toWei('20','Ether')})
+          contract.methods.addTrafficRule("tempo",10,20,30)
+            .send({ from: temp })
             .on('receipt', function (receipt) {
               console.log(receipt)
               web3.eth.personal.lockAccount(temp) //now again lock the account
@@ -180,6 +180,18 @@ class App extends Component {
             });
         }
       )
+      
+      // web3.eth.personal.unlockAccount(temp, 'password', 50000).then(
+      //   () => {
+      //     contract.methods.payChallan("l8")
+      //       .send({ from: temp ,value:web3.utils.toWei('20','Ether')})
+      //       .on('receipt', function (receipt) {
+      //         console.log(receipt)
+      //         web3.eth.personal.lockAccount(temp) //now again lock the account
+
+      //       });
+      //   }
+      // )
       
       // web3.eth.personal.unlockAccount(temp, 'password', 50000).then(
       //   () => {

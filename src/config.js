@@ -1,4 +1,4 @@
-export const SIMP_STORAGE_ADDRESS = '0x35B9aA60D8a287a91A6214d21dfe14b2036bD095'
+export const SIMP_STORAGE_ADDRESS = '0x97EF8bA62DF91Dc0C31e8335938793347f81b306'
 export const SIMP_STORAGE_ABI = [
   {
     "inputs": [],
@@ -173,7 +173,7 @@ export const SIMP_STORAGE_ABI = [
         "type": "string"
       },
       {
-        "internalType": "enum FinalA.VehicleType",
+        "internalType": "enum FinalB.VehicleType",
         "name": "_CarType",
         "type": "uint8"
       },
@@ -226,7 +226,7 @@ export const SIMP_STORAGE_ABI = [
             "type": "string"
           },
           {
-            "internalType": "enum FinalA.VehicleType",
+            "internalType": "enum FinalB.VehicleType",
             "name": "CarType",
             "type": "uint8"
           },
@@ -256,7 +256,7 @@ export const SIMP_STORAGE_ABI = [
             "type": "bool"
           }
         ],
-        "internalType": "struct FinalA.Challan",
+        "internalType": "struct FinalB.Challan",
         "name": "",
         "type": "tuple"
       }
@@ -293,7 +293,7 @@ export const SIMP_STORAGE_ABI = [
             "type": "string"
           },
           {
-            "internalType": "enum FinalA.VehicleType",
+            "internalType": "enum FinalB.VehicleType",
             "name": "CarType",
             "type": "uint8"
           },
@@ -323,7 +323,7 @@ export const SIMP_STORAGE_ABI = [
             "type": "bool"
           }
         ],
-        "internalType": "struct FinalA.Challan[]",
+        "internalType": "struct FinalB.Challan[]",
         "name": "",
         "type": "tuple[]"
       }
@@ -364,7 +364,7 @@ export const SIMP_STORAGE_ABI = [
             "type": "bool"
           }
         ],
-        "internalType": "struct FinalA.VoilationRule[]",
+        "internalType": "struct FinalB.VoilationRule[]",
         "name": "",
         "type": "tuple[]"
       }
