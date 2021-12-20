@@ -49,12 +49,12 @@ function AddChallan() {
       
 
 
-      const array = []
-
-
+      let array = []
 
       function VcodeF(code){
+        array=VCode;
         array.push(code.value)
+        console.log(array)
         setVCode(array)
       }
 
@@ -133,7 +133,7 @@ function AddChallan() {
                         <Dropdown value={options1[CarType]} options={options1} placeholder="Select a Vehicle" onChange={(value)=>updateCarType(value)} required />
                         <br />
                         <label>Select Rule</label>
-                        <Dropdown  options={FormRule} placeholder="Select a Rule " onChange={(value)=>VcodeF(value.value)} />
+                        <Dropdown  options={FormRule} placeholder="Select a Rule " onChange={(value)=>VcodeF(value)} />
                         <button onClick={()=>{UpdateRuleOption()}}>getLatestRule</button>
                         < br />
                         < br />
