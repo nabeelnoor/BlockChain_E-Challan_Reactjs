@@ -60,7 +60,50 @@ class App extends Component {
       // console.log(tempo)
     }
 
+    const addTrafficPolice = async () => {
+      let policeOfficer = '0x956Fb5596AEe32C1e9575FeD4526FDBd96634D13';
+      let admin='0xF4785b31f0758EDF2704e9518084e2b0C5cA5F7e'
+      const web3 = new Web3("http://localhost:7545")
+      //perfectly working with the blockChain to call contract
+      let Contract = require('web3-eth-contract');
+      Contract.setProvider("http://localhost:7545");
+      let contract = new Contract(SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS);  //get the instance of contract
+      web3.eth.personal.unlockAccount(admin, 'password', 50000).then(
+        () => {
+          contract.methods.addTrafficPolice(policeOfficer)
+            .send({ from: admin })
+            .on('receipt', function (receipt) {
+              console.log(receipt)
+              web3.eth.personal.lockAccount(admin) //now again lock the account
+            });
+        }
+      )
+    }
+
+
+    const addChallan = async () => {
+      let policeOfficer = '0x956Fb5596AEe32C1e9575FeD4526FDBd96634D13';
+      const web3 = new Web3("http://localhost:7545")
+      //perfectly working with the blockChain to call contract
+      let Contract = require('web3-eth-contract');
+      Contract.setProvider("http://localhost:7545");
+      let contract = new Contract(SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS);  //get the instance of contract
+      
+      web3.eth.personal.unlockAccount(policeOfficer, 'password', 50000).then(
+        () => {
+          contract.methods.addChallan("l5","Nabeel","123",1,"123",[0,1],"t")
+            .send({ from: policeOfficer,gas:473234,gasPrice:673234})
+            .on('receipt', function (receipt) {
+              console.log(receipt)
+              web3.eth.personal.lockAccount(policeOfficer) //now again lock the account
+            });
+        }
+      )
+
+    }
+
     const callContract = async () => {
+      let temp='0x956Fb5596AEe32C1e9575FeD4526FDBd96634D13'
       const web3 = new Web3("http://localhost:7545")
       //perfectly working with the blockChain to call contract
       let Contract = require('web3-eth-contract');
@@ -68,7 +111,7 @@ class App extends Component {
       let contract = new Contract(SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS);  //get the instance of contract
       //call to not payable function
       contract.methods.getTrafficRules()
-        .call({ from: '0x64647B792c7B31904E7a12c3857A54893a8c9ADb' },
+        .call({ from: temp },
           function (error, result) {
             console.log(result)
           });
@@ -76,48 +119,101 @@ class App extends Component {
 
       // call to payable function and sending 2 wei
       //you have to unlock account
-      web3.eth.personal.unlockAccount('0x64647B792c7B31904E7a12c3857A54893a8c9ADb', 'password', 50000).then(
+      web3.eth.personal.unlockAccount(temp, 'password', 50000).then(
         () => {
           contract.methods.test()
-            .send({ from: '0x64647B792c7B31904E7a12c3857A54893a8c9ADb', value: web3.utils.toWei('2', 'ether') })
+            .send({ from: temp, value: web3.utils.toWei('2', 'ether') })
             .on('receipt', function (receipt) {
               console.log(receipt)
-              web3.eth.personal.lockAccount('0x64647B792c7B31904E7a12c3857A54893a8c9ADb') //now again lock the account
+              web3.eth.personal.lockAccount(temp) //now again lock the account
 
             });
         }
       )
-      // console.log(tempo)
-
-      // await web3.eth.personal.lockAccount('0x172DDf7F7f8e1fFf5f04ba1b8Cd8Ed5242D43e73')
 
 
     }
 
     const getAccountBalance = async () => {
       const web3 = new Web3("http://localhost:7545")
-      web3.eth.getBalance('0x64647B792c7B31904E7a12c3857A54893a8c9ADb').then(value => console.log(value.toString()))
+      web3.eth.getBalance('0x1FAB079BD68117DC0E8B5d60f269eA1AdAE92e64').then(value => console.log(value.toString()))
     }
 
-    const transferAdmin =async ()=>{
+    const transferAdmin = async () => {
+      let admin='0xF4785b31f0758EDF2704e9518084e2b0C5cA5F7e'
       const web3 = new Web3("http://localhost:7545")
       const accounts = await web3.eth.getAccounts()
       let Contract = require('web3-eth-contract');
       Contract.setProvider("http://localhost:7545");
       let contract = new Contract(SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS);  //get the instance of contract
-      
-      contract.methods.transferAdmin("0x64647B792c7B31904E7a12c3857A54893a8c9ADb")
-        .send({ from: accounts[0]},
+
+      contract.methods.transferAdmin(admin)
+        .send({ from: accounts[0] },
           function (error, result) {
-            console.log("result:",result)
+            console.log("result:", result)
           });
 
       //display admin
       contract.methods.getOwner()
-        .call({ from: '0x64647B792c7B31904E7a12c3857A54893a8c9ADb' },
+        .call({ from: admin },
           function (error, result) {
-            console.log("\nCurrent Admin",result)
+            console.log("\nCurrent Admin", result)
           });
+    }
+
+    const addTrafficRule=async ()=>{
+      let temp='0x2004Cf479F2361cf71e432f9c949d28bb6d05B28'
+      const web3 = new Web3("http://localhost:7545")
+      //perfectly working with the blockChain to call contract
+      let Contract = require('web3-eth-contract');
+      Contract.setProvider("http://localhost:7545");
+      let contract = new Contract(SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS);  //get the instance of contract
+      
+      web3.eth.personal.unlockAccount(temp, 'password', 50000).then(
+        () => {
+          contract.methods.payChallan("l8")
+            .send({ from: temp ,value:web3.utils.toWei('20','Ether')})
+            .on('receipt', function (receipt) {
+              console.log(receipt)
+              web3.eth.personal.lockAccount(temp) //now again lock the account
+
+            });
+        }
+      )
+      
+      // web3.eth.personal.unlockAccount(temp, 'password', 50000).then(
+      //   () => {
+      //     contract.methods.activateRule(1)
+      //       .send({ from: temp })
+      //       .on('receipt', function (receipt) {
+      //         console.log(receipt)
+      //         web3.eth.personal.lockAccount(temp) //now again lock the account
+
+      //       });
+      //   }
+      // )
+      // web3.eth.personal.unlockAccount(temp, 'password', 50000).then(
+      //   () => {
+      //     contract.methods.deactivateRule(1)
+      //       .send({ from: temp })
+      //       .on('receipt', function (receipt) {
+      //         console.log(receipt)
+      //         web3.eth.personal.lockAccount(temp) //now again lock the account
+
+      //       });
+      //   }
+      // )
+      // web3.eth.personal.unlockAccount(temp, 'password', 50000).then(
+      //   () => {
+      //     contract.methods.updatePriceForRule(1,11,20,30)
+      //       .send({ from: temp })
+      //       .on('receipt', function (receipt) {
+      //         console.log(receipt)
+      //         web3.eth.personal.lockAccount(temp) //now again lock the account
+
+      //       });
+      //   }
+      // )
     }
 
     return (
@@ -144,6 +240,9 @@ class App extends Component {
         <button onClick={callContract}>callContract</button>
         <button onClick={getAccountBalance}>getBalance</button>
         <button onClick={transferAdmin}>changeAdmin</button>
+        <button onClick={addChallan}>addChallan</button>
+        <button onClick={addTrafficPolice}>addTrafficPolice</button>
+        <button onClick={addTrafficRule}>addTrafficRule</button>
       </ div>
     );
   }
