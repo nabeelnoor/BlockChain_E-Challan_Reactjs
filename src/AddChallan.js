@@ -25,11 +25,11 @@ function AddChallan() {
   const [License, setLicense] = useState("");
   const [Name, setName] = useState("");
   const [CNIC, setCNIC] = useState("");
-  const [CarType, setCarType] = useState(0); //{Motorcycle,Motorcar,Jeep,PublicServiceVehicle,PrivateCarrier,PublicCarrier}
   const [Plate, setPlate] = useState("");    //the account has been created and added to blockchain (store that password and address to login as officer)
-  const [VCode, setVCode] = useState([])
-  const [Msg, setMsg] = useState("");
+  const [CarType, setCarType] = useState(0); //{Motorcycle,Motorcar,Jeep,PublicServiceVehicle,PrivateCarrier,PublicCarrier}
   const [ListRule, setListRule] = useState([]);
+  const [Msg, setMsg] = useState("");
+  const [VCode, setVCode] = useState([])
 
 
   const getVoilationRule = async () => {
