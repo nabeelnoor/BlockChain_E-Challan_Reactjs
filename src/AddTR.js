@@ -75,11 +75,16 @@ function AddTR() {
             .on('receipt', function (receipt) {
               console.log(receipt)
               // web3.eth.personal.lockAccount(temp) //now again lock the account
+              setDesc("")
+              setF1(0)
+              setF2(0)
+              setF3(0)
 
             });
         }
       )
       setMsg("Rule added")
+      
     } catch (e) {
       setMsg("Some thing went wrong")
     }
@@ -105,7 +110,7 @@ function AddTR() {
               Please Fill the relevant details
             </Typography>
 
-            <TextField id="outlined-basic" label="Rule Description" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '20px', width: "520px" }}
+            <TextField value={Desc} id="outlined-basic" label="Rule Description" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '20px', width: "520px" }}
               onChange={(e) => { setDesc(e.target.value) }}
             />
             <Typography gutterBottom variant="h6" component="div" style={{ paddingLeft: "20px" }}>
