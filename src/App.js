@@ -140,7 +140,7 @@ class App extends Component {
     }
 
     const transferAdmin = async () => {
-      let admin='0xF4785b31f0758EDF2704e9518084e2b0C5cA5F7e'
+      let admin='0x2C148c4e5D6d8cd554DC65b7BCe808D4AE97a757'
       const web3 = new Web3("http://localhost:7545")
       const accounts = await web3.eth.getAccounts()
       let Contract = require('web3-eth-contract');
@@ -162,24 +162,29 @@ class App extends Component {
     }
 
     const addTrafficRule=async ()=>{
-      let temp='0xF4785b31f0758EDF2704e9518084e2b0C5cA5F7e'
+      let temp='0x2C148c4e5D6d8cd554DC65b7BCe808D4AE97a757'
       const web3 = new Web3("http://localhost:7545")
+      const accounts = await web3.eth.getAccounts()
       //perfectly working with the blockChain to call contract
       let Contract = require('web3-eth-contract');
       Contract.setProvider("http://localhost:7545");
       let contract = new Contract(SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS);  //get the instance of contract
       
-      web3.eth.personal.unlockAccount(temp, 'password', 50000).then(
-        () => {
+      // web3.eth.personal.unlockAccount(temp, 'password', 50000).then(
+      //   () => {
           contract.methods.addTrafficRule("tempo",10,20,30)
-            .send({ from: temp })
+            .send({ from: accounts[0] ,
+              gasPrice:90000,
+              gas:190000
+            
+            })
             .on('receipt', function (receipt) {
               console.log(receipt)
-              web3.eth.personal.lockAccount(temp) //now again lock the account
+              // web3.eth.personal.lockAccount(temp) //now again lock the account
 
             });
-        }
-      )
+      //   }
+      // )
       
       // web3.eth.personal.unlockAccount(temp, 'password', 50000).then(
       //   () => {
