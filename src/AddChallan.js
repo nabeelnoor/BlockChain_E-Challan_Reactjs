@@ -12,22 +12,13 @@ import {  BrowserRouter as Router,
 import { useEffect, useState } from 'react';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-// import Cookies from 'universal-cookie';
-// import { useSelector,useDispatch } from 'react-redux'; //redux
-// import {StorePrivate,ClearPrivateData} from './actions/index' //redux
+import Web3 from "web3";
+import { SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS } from './config'
 
 const style1 = { fill: 'grey',marginLeft:'10px' }
 
 //
 function AddChallan() {
-
-
-
-    const [privateKey, setPrivateKey] = useState("");
-    const [publicKey, setPublicKey] = useState("");
-    const [loginPass, setloginPass] = useState('');
-    // console.log(str)
-
 
       const [License, setLicense] = useState('');
       const [Name, setName] = useState('');
@@ -35,8 +26,9 @@ function AddChallan() {
       const [Plate, setPlate] = useState('');
       const [CarType, setCarType] = useState(0);
       const [Msg, setMsg] = useState('');
-      const [ListRule, setListRule] = useState([]);
-      const [VCode, setVCode] = useState([]);
+      const [ListRule, setListRule] = useState([]); //display list of voilation rules raw
+      const [FormRule,setFormRule] =useState([])
+      const [VCode, setVCode] = useState([]); //display corresponding number to be go to backend
 
 
       const updateCarType=async(res)=>{
@@ -44,10 +36,6 @@ function AddChallan() {
         console.log(tempe)
         setCarType(tempe)
       }
-
-      // const options = [
-      //   'Motorcycle', 'Motorcar', 'Jeep','PublicServiceVehicle','PrivateCarrier','PublicCarrier'
-      // ];
 
       const options1 = [
         { value: 0, label: 'Motorcycle' },
@@ -58,21 +46,16 @@ function AddChallan() {
         { value: 5, label: 'PublicCarrier'}
       ];
 
-      // const defaultOption = options[0];
+      
 
-     // console.log(VCode)
 
-     const array = []
+      const array = []
 
 
 
       function VcodeF(code){
-        //console.log(code.value)
-        //// setVCode.push(code)
-        // console.log(VCode[0])
         array.push(code.value)
         setVCode(array)
-        //console.log(array)
       }
 
       function add(){
@@ -81,12 +64,46 @@ function AddChallan() {
           console.log("\nCNIC",CNIC)
           console.log("\nPlate",Plate)
           console.log("\nCartype",CarType)
-          console.log("\nListRule",VCode)
+          console.log("\nVCode",VCode)
+          console.log("\nListRule",ListRule)
+          console.log("\nOption",FormRule)
       }
 
       
+      useEffect(()=>{
+        getVoilationRule();
+      },[])
 
-      console.log(VCode);
+      const UpdateRuleOption=async ()=>{
+        const RuleOption=[]
+        for(let i=0;i<ListRule.length;i++){
+          if(ListRule[i].status==true){
+            RuleOption.push({"value":i,"label":ListRule[i].Description})
+          }
+        }
+        setFormRule(RuleOption)
+      }
+
+      const getVoilationRule = async () => {
+        let id = localStorage.getItem('id');
+  
+        let Contract = require('web3-eth-contract');
+        Contract.setProvider("http://localhost:7545");
+        let contract = new Contract(SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS);  //get the instance of contract
+        //call to not payable function
+        try {
+          contract.methods.getTrafficRules()
+            .call({ from: id },
+              function (error, result) {
+                console.log(result)
+                setListRule(result)
+              });
+              console.log("success")
+    
+        } catch (e) {
+          setMsg("Something went wrong")
+        }
+      }
 
     return (
         <div style={{backgroundColor:'khaki',height:"1000px"}}>
@@ -116,7 +133,8 @@ function AddChallan() {
                         <Dropdown value={options1[CarType]} options={options1} placeholder="Select a Vehicle" onChange={(value)=>updateCarType(value)} required />
                         <br />
                         <label>Select Rule</label>
-                        <Dropdown  options={options1} placeholder="Select a Rule " onChange={(value)=>VcodeF(value.value)} />
+                        <Dropdown  options={FormRule} placeholder="Select a Rule " onChange={(value)=>VcodeF(value.value)} />
+                        <button onClick={()=>{UpdateRuleOption()}}>getLatestRule</button>
                         < br />
                         < br />
                         < br />
