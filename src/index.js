@@ -9,6 +9,7 @@ import Block from './Block';
 import Admin from './admin';
 import Citizen from './Citizen';
 import AddTP from './AddTP';
+import AddTR from './AddTR';
 
 
 
@@ -31,6 +32,7 @@ class App extends React.Component {
         <Route path="citizen" caseSensitive={false} element={<Citizen />} />
         <Route path="police" caseSensitive={false} element={<Admin />} />
         <Route path="admin/addTP" caseSensitive={false} element={<AddTP />} />
+        <Route path="admin/addTR" caseSensitive={false} element={<AddTR />} />
         {/* <Route path="citizen" caseSensitive={false} element={<Chat />} />
         <Route path="police" caseSensitive={false} element={<Test />} /> */}
       </Routes>
