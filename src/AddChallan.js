@@ -29,7 +29,7 @@ function AddChallan() {
       const [ListRule, setListRule] = useState([]); //display list of voilation rules raw
       const [FormRule,setFormRule] =useState([])
       const [VCode, setVCode] = useState([]); //display corresponding number to be go to backend
-
+      const [Curr,setCurr]=useState(0);
 
       const updateCarType=async(res)=>{
         let tempe=res.value
@@ -51,10 +51,15 @@ function AddChallan() {
 
       let array = []
 
-      function VcodeF(code){
+      function updateCurr(code){
+        let temp=code.value
+        setCurr(temp)
+      }
+
+      function updateVCode(){
         array=VCode;
-        array.push(code.value)
-        console.log(array)
+        array.push(Curr)
+        setCurr(0)
         setVCode(array)
       }
 
@@ -133,8 +138,9 @@ function AddChallan() {
                         <Dropdown value={options1[CarType]} options={options1} placeholder="Select a Vehicle" onChange={(value)=>updateCarType(value)} required />
                         <br />
                         <label>Select Rule</label>
-                        <Dropdown  options={FormRule} placeholder="Select a Rule " onChange={(value)=>VcodeF(value)} />
+                        <Dropdown  options={FormRule} placeholder="Select a Rule " onChange={(value)=>updateCurr(value)} />
                         <button onClick={()=>{UpdateRuleOption()}}>getLatestRule</button>
+                        <button onClick={()=>{updateVCode()}}>Add Rule</button>
                         < br />
                         < br />
                         < br />
