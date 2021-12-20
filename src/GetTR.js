@@ -14,7 +14,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { TextField, Input, TextareaAutosize } from '@mui/material';
-import { MDBContainer,MDBCardImage,MDBCardTitle, MDBRow, MDBCol, MDBCard,MDBCardBody,MDBInput, MDBBtn } from 'mdbreact';
+import { MDBContainer, MDBCardImage, MDBCardTitle, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn } from 'mdbreact';
 import Web3 from "web3";
 import { SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS } from './config'
 import "./getTr.css"
@@ -61,15 +61,54 @@ function GetTR() {
   }, [])
 
 
-const  _DeactivateRule=async (val)=>{
-  let targetIndex=val.index;
-  console.log(targetIndex)
-}
+  const _DeactivateRule = async (val) => {
+    const web3 = new Web3("http://localhost:7545")
+    //perfectly working with the blockChain to call contract
+    let Contract = require('web3-eth-contract');
+    Contract.setProvider("http://localhost:7545");
+    let contract = new Contract(SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS);  //get the instance of contract
 
-const  _ActivateRule=async (val)=>{
-  let targetIndex=val.index;
-  console.log(targetIndex)
-}
+    let targetIndex = val.index;
+    console.log(targetIndex)
+    let id = localStorage.getItem('id');
+
+    web3.eth.personal.unlockAccount(id, localStorage.getItem('pswd'), 50000).then(
+      () => {
+        contract.methods.deactivateRule(targetIndex)
+          .send({ from: id })
+          .on('receipt', function (receipt) {
+            console.log(receipt)
+            getVoilationRule()
+            // web3.eth.personal.lockAccount(temp) //now again lock the account
+          });
+      }
+    )
+  }
+
+  const _ActivateRule = async (val) => {
+    const web3 = new Web3("http://localhost:7545")
+    //perfectly working with the blockChain to call contract
+    let Contract = require('web3-eth-contract');
+    Contract.setProvider("http://localhost:7545");
+    let contract = new Contract(SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS);  //get the instance of contract
+
+    let targetIndex = val.index;
+    console.log(targetIndex)
+    let id = localStorage.getItem('id');
+
+    web3.eth.personal.unlockAccount(id, localStorage.getItem('pswd'), 50000).then(
+      () => {
+        contract.methods.activateRule(targetIndex)
+          .send({ from: id })
+          .on('receipt', function (receipt) {
+            console.log(receipt)
+            getVoilationRule()
+            // web3.eth.personal.lockAccount(temp) //now again lock the account
+
+          });
+      }
+    )
+  }
 
 
 
@@ -98,7 +137,7 @@ const  _ActivateRule=async (val)=>{
                   <MDBCard className="card" >
                     <MDBCardBody>
                       <MDBCardTitle style={{ color: 'indigo' }}>Code ID: {index}</MDBCardTitle>
-                      
+
                       <span><h5>Description: {item.Description}</h5></span>
                       <br />
                       <span><h5>ACategoryVehicle_Fine: {item.ACategoryVehicle_Fine}</h5></span>
@@ -110,19 +149,19 @@ const  _ActivateRule=async (val)=>{
                       <span><h5>Status: {item.status.toString()}</h5></span>
                       <br />
                       {
-                        item.status==true?
-                          <button className="buttonColor" onClick={()=>_ActivateRule({index})}>ActivateRule</button>:
-                        
-                          <button className="buttonColor" onClick={()=>_DeactivateRule({index})}>DeactivateRule</button>
+                        item.status != true ?
+                          <button className="buttonColor" onClick={() => _ActivateRule({ index })}>ActivateRule</button> :
+
+                          <button className="buttonColor" onClick={() => _DeactivateRule({ index })}>DeactivateRule</button>
                       }
-                      
+
                       <br></br>
-                      
+
 
                     </MDBCardBody>
 
-                    
-                   
+
+
                   </MDBCard>
                 </MDBCol>
                 <br></br>
