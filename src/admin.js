@@ -1,9 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import BackgroundSlider from 'react-background-slider'
-import background from "./images/c2.jpg"
-import background1 from "./images/c5.jpg"
-import background2 from "./images/c1.jpg"
+import background1 from "./images/c3.jpg"
+import background2 from "./images/c5.jpg"
 // import Register from './register';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
@@ -22,13 +21,13 @@ function Admin() {
 
   return (
     <div>
-      {"Admin"}
+      {/* {"Admin"}
       <br></br>
       { localStorage.getItem('id')}
       <br></br>
       {localStorage.getItem('pswd')}
-      <br></br>
-      {/* <BackgroundSlider
+      <br></br> */}
+      <BackgroundSlider
         images={[background1, background2]}
         duration={8} transition={2} />
 
@@ -40,15 +39,9 @@ function Admin() {
         <Button variant="contained" style={{ marginLeft: '50px' }} onClick={(e) => {setVisibility(!visibility); setDecider(1)}}>Traffic Officer Panel</Button>
         <Button variant="contained" style={{ marginLeft: '70px' }} onClick={(e) => {setVisibility(!visibility); setDecider(0)}}>Citizen Panel</Button>
        
-        <CustomPopup
-          onClose={popupCloseHandler}
-          show={visibility}
-          title="Login Here"
-          panel={Decider}
-        >
-          
-        </CustomPopup>
-      </div> */}
+      
+      
+      </div>
     </div>
   );
 }
