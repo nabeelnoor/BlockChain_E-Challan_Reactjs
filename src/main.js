@@ -14,6 +14,7 @@ import CustomPopup from "./CustomPopup"
 function Main() {
 
   const [visibility, setVisibility] = useState(false);
+  const [Decider,setDecider]=useState(0);
 
   const popupCloseHandler = (e) => {
     setVisibility(e);
@@ -21,30 +22,30 @@ function Main() {
 
   return (
     <div>
-    <BackgroundSlider
-  images={[background1,background2]}
-  duration={8} transition={2} />
-  
-<div>
-<h1 style={{color:'white',paddingLeft:'50px',paddingTop:'60px'}}>Challan Payment</h1>
-<p style={{color:'whitesmoke',paddingLeft:'50px',marginBottom:'100px',fontSize:25}}>
-An End-End Encrypted Fee Challan Payment Application</p>
-<Button variant="contained" style={{marginLeft:'20px'}} onClick={(e) => setVisibility(!visibility)}>Admin Panel</Button>
-<Button variant="contained" style={{marginLeft:'50px'}} onClick={(e) => setVisibility(!visibility)}>Traffic Officer Panel</Button>
-<Button variant="contained" style={{marginLeft:'70px'}} onClick={(e) => setVisibility(!visibility)}>Citizen Panel</Button>
-{/* <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+      <BackgroundSlider
+        images={[background1, background2]}
+        duration={8} transition={2} />
+
+      <div>
+        <h1 style={{ color: 'white', paddingLeft: '50px', paddingTop: '60px' }}>Challan Payment</h1>
+        <p style={{ color: 'whitesmoke', paddingLeft: '50px', marginBottom: '100px', fontSize: 25 }}>
+          An End-End Encrypted Fee Challan Payment Application</p>
+        <Button variant="contained" style={{ marginLeft: '20px' }} onClick={(e) => {setVisibility(!visibility); setDecider(2)}}>Admin Panel</Button>
+        <Button variant="contained" style={{ marginLeft: '50px' }} onClick={(e) => {setVisibility(!visibility); setDecider(1)}}>Traffic Officer Panel</Button>
+        <Button variant="contained" style={{ marginLeft: '70px' }} onClick={(e) => {setVisibility(!visibility); setDecider(0)}}>Citizen Panel</Button>
+        {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" />
 <TextField id="filled-basic" label="Filled" variant="filled" />
 // <TextField id="standard-basic" label="Standard" variant="standard" /> */}
-<CustomPopup
-        onClose={popupCloseHandler}
-        show={visibility}
-        title="Login Here"
-      >
-        {/* <h1>Hello This is Popup Content Area</h1>
-        <h2>This is my lorem ipsum text here!</h2> */}
-      </CustomPopup>
-</div>
-</div>
+        <CustomPopup
+          onClose={popupCloseHandler}
+          show={visibility}
+          title="Login Here"
+          panel={Decider}
+        >
+          
+        </CustomPopup>
+      </div>
+    </div>
   );
 }
 
