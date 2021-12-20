@@ -56,16 +56,11 @@ function CShowChallanHistory() {
     }
   }
 
-  const getVehicleName =async (value) =>{
-    let Vehicle=["Motorcycle","Motorcar","Jeep","PublicServiceVehicle","PrivateCarrier","PublicCarrier"]
-    return Vehicle[value];
-  }
-
   useEffect(() => {
     getVoilationRule();
     getChallanHistory();
   }, [])
-
+  let Vehicle=["Motorcycle","Motorcar","Jeep","PublicServiceVehicle","PrivateCarrier","PublicCarrier"]
 
 
   return (
@@ -79,27 +74,31 @@ function CShowChallanHistory() {
 
         <div className="mainContainer">
           {
-            ListRule.map((item, index) => (
-              item.status==true?
+            ListChallan.map((item, index) => (
               <div key={index}>
 
 
                 <MDBCol style={{ maxWidth: "30rem" }} className="listContainer">
                   <MDBCard className="card" >
                     <MDBCardBody>
-                      <MDBCardTitle style={{ color: 'indigo' }}>Code ID: {index}</MDBCardTitle>
+                      <MDBCardTitle style={{ color: 'indigo' }}>License ID: {item.LicenseID}</MDBCardTitle>
 
-                      <span><h5>Description: {item.Description}</h5></span>
+                      <span><h5>Citizen Name: {item.CitizenName}</h5></span>
                       <br />
-                      <span><h5>ACategoryVehicle_Fine: {item.ACategoryVehicle_Fine}</h5></span>
+                      <span><h5>Citizen CNIC: {item.CitizenCNIC}</h5></span>
                       <br />
-                      <span><h5>BCategoryVehicle_Fine:{item.BCategoryVehicle_Fine}</h5></span>
+                      <span><h5>Vehicle type:{Vehicle[item.CarType]}</h5></span>
                       <br />
-                      <span><h5>CCategoryVehicle_Fine:{item.CCategoryVehicle_Fine}</h5></span>
+                      <span><h5>Vehicle Plate:{item.CarNumberPlate}</h5></span>
+                      <br />
+                      <span><h5>Voilated Rules Code: {item.VoilationCode.toString()}</h5></span>
+                      <br />
+                      <span><h5>Fine: {item.Fine} Ethers</h5></span>
+                      <br />
+                      <span><h5>Time: {item.timeStamp}</h5></span>
                       <br />
                       <span><h5>Status: {item.status.toString()}</h5></span>
                       <br />
-
 
                     </MDBCardBody>
 
@@ -111,7 +110,6 @@ function CShowChallanHistory() {
 
 
               </div>
-              :<div key={index} style={{display:"none"}}></div>
             )
             )
           }
