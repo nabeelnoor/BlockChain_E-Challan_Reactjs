@@ -15,6 +15,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { TextField, Input, TextareaAutosize } from '@mui/material';
 import Web3 from "web3";
+import { SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS } from './config'
 // import { TextField } from '@mui/material';
 
 function AddTP() {
@@ -22,6 +23,31 @@ function AddTP() {
   const [Address, setAddress] = useState("");
   const [Password, setPassword] = useState("");
   const [Msg, setMsg] = useState(""); //the account has been created and added to blockchain (store that password and address to login as officer)
+
+  const addTrafficPolice = async () => {
+    let policeOfficer = Address; //traffic police addres  newly generated
+    let admin= localStorage.getItem('id');
+    const web3 = new Web3("http://localhost:7545")
+    //perfectly working with the blockChain to call contract
+    let Contract = require('web3-eth-contract');
+    Contract.setProvider("http://localhost:7545");
+    let contract = new Contract(SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS);  //get the instance of contract
+    try{
+      web3.eth.personal.unlockAccount(admin, 'password', 50000).then(
+        () => {
+          contract.methods.addTrafficPolice(policeOfficer)
+            .send({ from: admin })
+            .on('receipt', function (receipt) {
+              console.log(receipt)
+              web3.eth.personal.lockAccount(admin) //now again lock the account
+            });
+        }
+      )
+    }catch(e){
+      setMsg("Something went wrong")
+    }
+    
+  }
 
   const createAccount = () => {
     //this will create account from scratch
@@ -31,7 +57,9 @@ function AddTP() {
     let finalResult = web3.eth.personal.newAccount(Password)
       .then((result) => {
         console.log(result)
-        setAddress(result)
+        setAddress(result,()=>{
+          addTrafficPolice()
+        })
       })
     console.log(finalResult)
 
@@ -59,7 +87,7 @@ function AddTP() {
             />
             <Button variant="contained" style={{ marginTop: '6px', marginLeft: '50px', paddingBottom: '15px' }} onClick={createAccount}>create and add Account</Button>
             <br></br>
-            {Msg != "" ? <div style={{ display: "None" }}></div> :
+            {Address == "" ? <div style={{ display: "None" }}></div> :
               <div>
                 <Typography gutterBottom variant="h7" component="div" style={{ paddingTop: "20px", paddingLeft: "20px" }}>
                 Newly Generated Address has been stored as police officer identity in blockchain
@@ -67,6 +95,13 @@ function AddTP() {
                 <TextField value={Address} id="outlined-basic" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px', width: "520px" }}
                 />
               </div>}
+              {Msg == "" ? <div style={{ display: "None" }}></div> :
+              <div>
+                <Typography gutterBottom variant="h7" component="div" style={{ paddingTop: "20px", paddingLeft: "20px" }}>
+                {Msg}
+              </Typography>
+              </div>}
+            
           </CardContent>
 
 
