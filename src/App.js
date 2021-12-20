@@ -81,26 +81,7 @@ class App extends Component {
     }
 
 
-    const addChallan = async () => {
-      let policeOfficer = '0x956Fb5596AEe32C1e9575FeD4526FDBd96634D13';
-      const web3 = new Web3("http://localhost:7545")
-      //perfectly working with the blockChain to call contract
-      let Contract = require('web3-eth-contract');
-      Contract.setProvider("http://localhost:7545");
-      let contract = new Contract(SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS);  //get the instance of contract
-      
-      web3.eth.personal.unlockAccount(policeOfficer, 'password', 50000).then(
-        () => {
-          contract.methods.addChallan("l5","Nabeel","123",1,"123",[0,1],"t")
-            .send({ from: policeOfficer,gas:473234,gasPrice:673234})
-            .on('receipt', function (receipt) {
-              console.log(receipt)
-              web3.eth.personal.lockAccount(policeOfficer) //now again lock the account
-            });
-        }
-      )
-
-    }
+    
 
     const callContract = async () => {
       let temp='0x956Fb5596AEe32C1e9575FeD4526FDBd96634D13'
@@ -159,6 +140,29 @@ class App extends Component {
           function (error, result) {
             console.log("\nCurrent Admin", result)
           });
+    }
+    
+    const addChallan = async () => {
+      let policeOfficer = '0x2C148c4e5D6d8cd554DC65b7BCe808D4AE97a757';
+      const web3 = new Web3("http://localhost:7545")
+      //perfectly working with the blockChain to call contract
+      let Contract = require('web3-eth-contract');
+      Contract.setProvider("http://localhost:7545");
+      let contract = new Contract(SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS);  //get the instance of contract
+      
+      web3.eth.personal.unlockAccount(policeOfficer, 'password', 50000).then(
+        () => {
+          contract.methods.addChallan("l5","Nabeel","123",1,"123",[0,1],"t")
+            .send({ from: policeOfficer,
+              gasPrice:90000,
+              gas:890000})
+            .on('receipt', function (receipt) {
+              console.log(receipt)
+              web3.eth.personal.lockAccount(policeOfficer) //now again lock the account
+            });
+        }
+      )
+
     }
 
     const addTrafficRule=async ()=>{
