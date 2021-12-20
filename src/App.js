@@ -170,10 +170,10 @@ class App extends Component {
       Contract.setProvider("http://localhost:7545");
       let contract = new Contract(SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS);  //get the instance of contract
       
-      // web3.eth.personal.unlockAccount(temp, 'password', 50000).then(
-      //   () => {
+      web3.eth.personal.unlockAccount(temp, 'password', 50000).then(
+        () => {
           contract.methods.addTrafficRule("tempo",10,20,30)
-            .send({ from: accounts[0] ,
+            .send({ from: temp ,
               gasPrice:90000,
               gas:190000
             
@@ -183,8 +183,8 @@ class App extends Component {
               // web3.eth.personal.lockAccount(temp) //now again lock the account
 
             });
-      //   }
-      // )
+        }
+      )
       
       // web3.eth.personal.unlockAccount(temp, 'password', 50000).then(
       //   () => {
