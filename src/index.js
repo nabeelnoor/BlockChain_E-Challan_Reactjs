@@ -10,6 +10,7 @@ import Admin from './admin';
 import Citizen from './Citizen';
 import AddTP from './AddTP';
 import AddTR from './AddTR';
+import GetTR from './GetTR';
 
 
 
@@ -33,6 +34,8 @@ class App extends React.Component {
         <Route path="police" caseSensitive={false} element={<Admin />} />
         <Route path="admin/addTP" caseSensitive={false} element={<AddTP />} />
         <Route path="admin/addTR" caseSensitive={false} element={<AddTR />} />
+        <Route path="/admin/showTR" caseSensitive={false} element={<GetTR />} />
+        
         {/* <Route path="citizen" caseSensitive={false} element={<Chat />} />
         <Route path="police" caseSensitive={false} element={<Test />} /> */}
       </Routes>

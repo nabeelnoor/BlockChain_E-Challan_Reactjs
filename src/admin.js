@@ -22,7 +22,7 @@ function Admin() {
 
   return (
     <div>
-      <Sidenav name0="Admin Panel" name1="Add Traffic Rule" name2="Show Traffic Rule"  name3="Add Traffic Officer" name4="Show Traffic Officer" link0="admin" link1="addTR" link2="showTR" link3="addTP" link4="showTP"/>
+      <Sidenav name0="Admin Panel" name1="Add Traffic Rule" name2="Show Traffic Rule" name3="Add Traffic Officer" name4="Show Traffic Officer" link0="/admin" link1="/admin/addTR" link2="/admin/showTR" link3="/admin/addTP" link4="/admin/showTP" />
       {/* {"Admin"}
       <br></br>
       { localStorage.getItem('id')}
