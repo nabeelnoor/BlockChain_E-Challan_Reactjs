@@ -33,15 +33,21 @@ function AddChallan() {
       const [Name, setName] = useState('');
       const [CNIC, setCNIC] = useState('');
       const [Plate, setPlate] = useState('');
-      const [CarType, setCarType] = useState('');
-      const [ListRule, setListRule] = useState([]);
+      const [CarType, setCarType] = useState(0);
       const [Msg, setMsg] = useState('');
+      const [ListRule, setListRule] = useState([]);
       const [VCode, setVCode] = useState([]);
 
 
-      const options = [
-        'Motorcycle', 'Motorcar', 'Jeep','PublicServiceVehicle','PrivateCarrier','PublicCarrier'
-      ];
+      const updateCarType=async(res)=>{
+        let tempe=res.value
+        console.log(tempe)
+        setCarType(tempe)
+      }
+
+      // const options = [
+      //   'Motorcycle', 'Motorcar', 'Jeep','PublicServiceVehicle','PrivateCarrier','PublicCarrier'
+      // ];
 
       const options1 = [
         { value: 0, label: 'Motorcycle' },
@@ -52,7 +58,7 @@ function AddChallan() {
         { value: 5, label: 'PublicCarrier'}
       ];
 
-      const defaultOption = options[0];
+      // const defaultOption = options[0];
 
      // console.log(VCode)
 
@@ -65,12 +71,20 @@ function AddChallan() {
         //// setVCode.push(code)
         // console.log(VCode[0])
         array.push(code.value)
+        setVCode(array)
         //console.log(array)
       }
 
       function add(){
-          setVCode(array)
+          console.log("\nLID",License)
+          console.log("\nName",Name)
+          console.log("\nCNIC",CNIC)
+          console.log("\nPlate",Plate)
+          console.log("\nCartype",CarType)
+          console.log("\nListRule",VCode)
       }
+
+      
 
       console.log(VCode);
 
@@ -84,28 +98,25 @@ function AddChallan() {
                             Add Challan
                         </Typography>
                         <br />
-                        <TextField id="outlined-basic" label="Enter Name" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px' }} 
+                        <TextField value={Name} id="outlined-basic" label="Enter Name" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px' }} 
                         onChange={(e) => {setName(e.target.value)}}
                         />
-                        <TextField id="outlined-basic" label="Enter License ID" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px' }} 
+                        <TextField value={License} id="outlined-basic" label="Enter License ID" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px' }} 
                         onChange={(e) => {setLicense(e.target.value)}}
                         />
-                         <TextField id="outlined-basic" label="Enter CNIC" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px' }} 
+                         <TextField value={CNIC} id="outlined-basic" label="Enter CNIC" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px' }} 
                         onChange={(e) => {setCNIC(e.target.value)}}
                         />
-                         <TextField id="outlined-basic" label="Enter Plate No" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px' }} 
+                         <TextField value={Plate} id="outlined-basic" label="Enter Plate No" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px' }} 
                         onChange={(e) => {setPlate(e.target.value)}}
                         />
                         
-                         <TextField id="outlined-basic" label="Enter Car Type" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px' }} 
-                        onChange={(e) => {setCarType(e.target.value)}}
-                        />
-                        <TextField id="outlined-basic" label="Enter Message" variant="outlined" style={{ color: 'wheat', marginLeft: '20px', paddingBottom: '30px' }} 
-                        onChange={(e) => {setMsg(e.target.value)}}
-                        />
-                        <Dropdown options={options1} placeholder="Select Rule" />
+                        <br></br>
+                        <label>Select Vehicle</label>
+                        <Dropdown value={options1[CarType]} options={options1} placeholder="Select a Vehicle" onChange={(value)=>updateCarType(value)} required />
                         <br />
-                        <Dropdown options={options1} placeholder="Select a Vehicle" onChange={(value)=>VcodeF(value)} />
+                        <label>Select Rule</label>
+                        <Dropdown  options={options1} placeholder="Select a Rule " onChange={(value)=>VcodeF(value.value)} />
                         < br />
                         < br />
                         < br />
