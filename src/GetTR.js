@@ -5,7 +5,7 @@ import background1 from "./images/c3.jpg"
 import background2 from "./images/c5.jpg"
 // import Register from './register';
 import Button from '@mui/material/Button';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import CustomPopup from "./CustomPopup"
 import Sidenav from './sidenav';
@@ -14,8 +14,11 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { TextField, Input, TextareaAutosize } from '@mui/material';
+import { MDBContainer,MDBCardImage,MDBCardTitle, MDBRow, MDBCol, MDBCard,MDBCardBody,MDBInput, MDBBtn } from 'mdbreact';
 import Web3 from "web3";
 import { SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS } from './config'
+import "./getTr.css"
+import { auto } from 'async';
 // import { TextField } from '@mui/material';
 
 function GetTR() {
@@ -58,7 +61,15 @@ function GetTR() {
   }, [])
 
 
+const  _DeactivateRule=async (val)=>{
+  let targetIndex=val.index;
+  console.log(targetIndex)
+}
 
+const  _ActivateRule=async (val)=>{
+  let targetIndex=val.index;
+  console.log(targetIndex)
+}
 
 
 
@@ -70,14 +81,60 @@ function GetTR() {
     <div>
       <Sidenav name0="Admin Panel" name1="Add Traffic Rule" name2="Show Traffic Rule" name3="Add Traffic Officer" name4="Show Traffic Officer" link0="/admin" link1="/admin/addTR" link2="/admin/showTR" link3="/admin/addTP" link4="/admin/showTP" />
 
-      <BackgroundSlider
+      {/* <BackgroundSlider
         images={[background1, background2]}
-        duration={8} transition={2} />
+        duration={8} transition={2} style={{height:auto}}/> */}
 
       <div>
         <h1 style={{ color: 'white', paddingLeft: '550px', paddingTop: '60px' }}>rule List</h1>
 
-      
+        <div className="mainContainer">
+          {
+            ListRule.map((item, index) => (
+              <div key={index}>
+
+
+                <MDBCol style={{ maxWidth: "30rem" }} className="listContainer">
+                  <MDBCard className="card" >
+                    <MDBCardBody>
+                      <MDBCardTitle style={{ color: 'indigo' }}>Code ID: {index}</MDBCardTitle>
+                      
+                      <span><h5>Description: {item.Description}</h5></span>
+                      <br />
+                      <span><h5>ACategoryVehicle_Fine: {item.ACategoryVehicle_Fine}</h5></span>
+                      <br />
+                      <span><h5>BCategoryVehicle_Fine:{item.BCategoryVehicle_Fine}</h5></span>
+                      <br />
+                      <span><h5>CCategoryVehicle_Fine:{item.CCategoryVehicle_Fine}</h5></span>
+                      <br />
+                      <span><h5>Status: {item.status.toString()}</h5></span>
+                      <br />
+                      {
+                        item.status==true?
+                          <button className="buttonColor" onClick={()=>_ActivateRule({index})}>ActivateRule</button>:
+                        
+                          <button className="buttonColor" onClick={()=>_DeactivateRule({index})}>DeactivateRule</button>
+                      }
+                      
+                      <br></br>
+                      
+
+                    </MDBCardBody>
+
+                    
+                   
+                  </MDBCard>
+                </MDBCol>
+                <br></br>
+
+
+              </div>
+            ))
+          }
+
+
+        </div>
+
 
 
       </div>
