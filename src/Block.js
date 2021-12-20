@@ -117,7 +117,7 @@ class Block extends Component {
 
     const getAccountBalance = async () => {
       const web3 = new Web3("http://localhost:7545")
-      web3.eth.getBalance('0x1FAB079BD68117DC0E8B5d60f269eA1AdAE92e64').then(value => console.log(value.toString()))
+      web3.eth.getBalance('0x97A2aa42Eae5E63Eb192A552b0609180219ee780').then(value => console.log(value.toString()))
     }
 
     const transferAdmin = async () => {
