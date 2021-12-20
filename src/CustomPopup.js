@@ -30,8 +30,9 @@ const CustomPopup = (props) => {
 
   const login = async () => {
     try {
+      console.log("Address:",Address,"PSWD:",Password)
       const web3 = new Web3("http://localhost:7545")
-      web3.eth.personal.unlockAccount(Address, 'password', 50000).then(result => {
+      web3.eth.personal.unlockAccount(Address, Password, 50000).then(result => {
         setPassword("")
         setAddress("")
         if (Decider == 0) {//citizen

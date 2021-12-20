@@ -33,9 +33,7 @@ function Main() {
         <Button variant="contained" style={{ marginLeft: '20px' }} onClick={(e) => {setVisibility(!visibility); setDecider(2)}}>Admin Panel</Button>
         <Button variant="contained" style={{ marginLeft: '50px' }} onClick={(e) => {setVisibility(!visibility); setDecider(1)}}>Traffic Officer Panel</Button>
         <Button variant="contained" style={{ marginLeft: '70px' }} onClick={(e) => {setVisibility(!visibility); setDecider(0)}}>Citizen Panel</Button>
-        {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" />
-<TextField id="filled-basic" label="Filled" variant="filled" />
-// <TextField id="standard-basic" label="Standard" variant="standard" /> */}
+        
         <CustomPopup
           onClose={popupCloseHandler}
           show={visibility}
