@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import Block from './Block';
 import Admin from './admin';
 import Citizen from './Citizen';
+import AddTP from './AddTP';
 
 
 
@@ -29,6 +30,7 @@ class App extends React.Component {
         <Route path="admin" caseSensitive={false} element={<Admin />} />
         <Route path="citizen" caseSensitive={false} element={<Citizen />} />
         <Route path="police" caseSensitive={false} element={<Admin />} />
+        <Route path="admin/addTP" caseSensitive={false} element={<AddTP />} />
         {/* <Route path="citizen" caseSensitive={false} element={<Chat />} />
         <Route path="police" caseSensitive={false} element={<Test />} /> */}
       </Routes>
