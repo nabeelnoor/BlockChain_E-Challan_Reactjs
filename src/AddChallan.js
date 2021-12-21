@@ -19,7 +19,6 @@ import { SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS } from './config'
 
 const style1 = { fill: 'grey', marginLeft: '10px' }
 
-//
 function AddChallan() {
 
   const [License, setLicense] = useState('');
