@@ -63,15 +63,19 @@ function AddChallan() {
         setVCode(array)
       }
 
-      function add(){
+      const removeDup=async ()=>{
+        let uniq = [...new Set(VCode)];
+        setVCode(uniq)
+      }
+
+      const add=async ()=>{
+          await removeDup();
           console.log("\nLID",License)
           console.log("\nName",Name)
           console.log("\nCNIC",CNIC)
           console.log("\nPlate",Plate)
           console.log("\nCartype",CarType)
           console.log("\nVCode",VCode)
-          console.log("\nListRule",ListRule)
-          console.log("\nOption",FormRule)
       }
 
       
@@ -100,10 +104,10 @@ function AddChallan() {
           contract.methods.getTrafficRules()
             .call({ from: id },
               function (error, result) {
-                console.log(result)
+                // console.log(result)
                 setListRule(result)
               });
-              console.log("success")
+              // console.log("success")
     
         } catch (e) {
           setMsg("Something went wrong")
