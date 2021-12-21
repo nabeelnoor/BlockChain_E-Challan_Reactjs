@@ -19,6 +19,7 @@ function CPayChallan() {
     console.log(localStorage.getItem("id"))
 
     let temp = localStorage.getItem("id")
+    let pswd = localStorage.getItem("pswd")
     const web3 = new Web3("http://localhost:7545")
     const accounts = await web3.eth.getAccounts()
     //perfectly working with the blockChain to call contract
@@ -26,14 +27,17 @@ function CPayChallan() {
     Contract.setProvider("http://localhost:7545");
     let contract = new Contract(SIMP_STORAGE_ABI, SIMP_STORAGE_ADDRESS);  //get the instance of contract
     try{
-      web3.eth.personal.unlockAccount(temp, 'password', 50000).then(
+      web3.eth.personal.unlockAccount(temp, pswd, 50000).then(
         () => {
           contract.methods.payChallan(temp)
-            .send({ from: temp, value: web3.utils.toWei(cost, 'Ether') })
+            .send({ from: temp, value: web3.utils.toWei(cost, 'Ether'),
+            gasPrice:90000,
+              gas:890000
+            })
             .on('receipt', function (receipt) {
               console.log(receipt)
               // web3.eth.personal.lockAccount(temp) //now again lock the account
-  
+              
             });
         }
       )
