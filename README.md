@@ -1,3 +1,15 @@
+### E-Challan using blockChain -FrontEnd 
+This repository contains frontend for E-Challan which is developed in Reactjs\n
+
+## UseCases
+Admin can add/remove traffic police officers. <br/>
+Admin can update voilation rules (can set prices,rules etc).<br/>
+Traffic Police officer can make challan of citizen. <br/>
+Citizen can pay challan. <br/>
+Citizen can check their challan history. <br/>
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
